@@ -25,5 +25,21 @@ public class BTSTest {
 
         System.out.print("John is in the tree?: ");
         System.out.println(tree.search("John"));
+
+        System.out.print("Delete Daniel from the tree: ");
+        tree.delete("Daniel");
+        tree.preOrder();
+
+        System.out.print("\nDelete Adam from the tree: ");
+        tree.delete("Adam");
+        tree.preOrder();
+
+        System.out.print("\nDelete Tom from the tree: ");
+        tree.delete("Tom");
+        tree.preOrder();
+
+        System.out.print("\nDelete George from the tree: ");
+        tree.delete("George");
+        tree.preOrder();
     }
 }

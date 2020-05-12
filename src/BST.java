@@ -40,6 +40,115 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
         return true;
     }
 
+    public TreeNode<E> findNode(E e) {
+        TreeNode<E> current = root;
+        while (current != null) {
+            if (e.compareTo(current.element) < 0) {
+                current = current.left;
+            } else if (e.compareTo(current.element) > 0) {
+                current = current.right;
+            } else if (e.compareTo(current.element) == 0)
+                return current;
+        }
+        return null;
+    }
+
+    public TreeNode<E> findParentNode(E e) {
+        TreeNode<E> parent = root;
+        TreeNode<E> current = root;
+        while (current != null) {
+            if (e.compareTo(current.element) < 0) {
+                parent = current;
+                current = current.left;
+            } else if (e.compareTo(current.element) > 0) {
+                parent = current;
+                current = current.right;
+            } else if (e.compareTo(current.element) == 0)
+                return parent;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean delete(E e) {
+        TreeNode<E> deleteNode;
+        TreeNode<E> parent;
+        TreeNode<E> successorNode;
+
+        deleteNode = findNode(e);
+        if (!search(e))
+            return true;
+
+        if (deleteNode.left == null && deleteNode.right == null) {
+            if (deleteNode == root) {
+                root = null;
+                return true;
+            }
+
+            parent = findParentNode(e);
+
+            if (parent.left == deleteNode) {
+                parent.left = null;
+            }
+            else {
+                parent.right = null;
+            }
+            return true;
+        }
+
+        if (deleteNode.right == null) {
+            if (deleteNode == root) {
+                root = root.left;
+                return true;
+            }
+
+            parent = findParentNode(e);
+
+            if (parent.left == deleteNode) {
+                parent.left = deleteNode.left;
+            }
+            else {
+                parent.right = deleteNode.left;
+            }
+            return true;
+        }
+
+        if (deleteNode.left == null) {
+            if (deleteNode == root) {
+                root = root.right;
+                return true;
+            }
+
+            parent = findParentNode(e);
+
+            if ( parent.left == deleteNode )
+                parent.left = deleteNode.right;
+            else
+                parent.right = deleteNode.right;
+
+            return true;
+        }
+
+        if (deleteNode.right.left == null) {
+            deleteNode.element = deleteNode.right.element;
+            deleteNode.right = deleteNode.right.right;
+
+            return true;
+        }
+
+        successorNode = deleteNode.right;
+        TreeNode<E> succParent = deleteNode;
+
+        while ( succParent.left != null ) {
+            succParent = successorNode;
+            successorNode = successorNode.left;
+        }
+
+        deleteNode.element = successorNode.element;
+        succParent.left = successorNode.right;
+        return true;
+    }
+
     @Override
     public void inOrder() {
         inOrder(root);
@@ -69,16 +178,16 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 
     @Override
     public void preOrder() {
-        preorder(root);
+        preOrder(root);
     }
 
-    protected void preorder(TreeNode<E> root) {
+    protected void preOrder(TreeNode<E> root) {
         if (root == null) {
             return;
         }
         System.out.print(root.element + " | ");
-        preorder(root.left);
-        preorder(root.right);
+        preOrder(root.left);
+        preOrder(root.right);
     }
 
     @Override

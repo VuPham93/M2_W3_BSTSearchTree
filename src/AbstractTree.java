@@ -5,6 +5,11 @@ public class AbstractTree<E> implements Tree<E> {
     }
 
     @Override
+    public boolean delete(E e) {
+        return false;
+    }
+
+    @Override
     public void inOrder() {
 
     }
