@@ -41,16 +41,44 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
     }
 
     @Override
-    public void inorder() {
-        inorder(root);
+    public void inOrder() {
+        inOrder(root);
     }
 
-    protected void inorder(TreeNode<E> root) {
+    protected void inOrder(TreeNode<E> root) {
         if (root == null)
             return;
-        inorder(root.left);
-        System.out.println(root.element + " ");
-        inorder(root.right);
+        inOrder(root.left);
+        System.out.print(root.element + " | ");
+        inOrder(root.right);
+    }
+
+    @Override
+    public void postOrder() {
+        postOrder(root);
+    }
+
+    protected void postOrder(TreeNode<E> root) {
+        if (root == null) {
+            return;
+        }
+        postOrder(root.left);
+        postOrder(root.right);
+        System.out.print(root.element + " | ");
+    }
+
+    @Override
+    public void preOrder() {
+        preorder(root);
+    }
+
+    protected void preorder(TreeNode<E> root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.element + " | ");
+        preorder(root.left);
+        preorder(root.right);
     }
 
     @Override

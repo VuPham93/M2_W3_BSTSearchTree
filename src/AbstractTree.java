@@ -5,7 +5,17 @@ public class AbstractTree<E> implements Tree<E> {
     }
 
     @Override
-    public void inorder() {
+    public void inOrder() {
+
+    }
+
+    @Override
+    public void postOrder() {
+
+    }
+
+    @Override
+    public void preOrder() {
 
     }
 

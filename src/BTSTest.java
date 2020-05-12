@@ -9,9 +9,16 @@ public class BTSTest {
         tree.insert("Peter");
         tree.insert("Daniel");
 
-        System.out.println("Inorder (sorted): ");
-        tree.inorder();
-        System.out.println("The number of nodes is: " + tree.getSize());
+        System.out.println("In order (sorted): ");
+        tree.inOrder();
+
+        System.out.println("\nPost order (sorted): ");
+        tree.postOrder();
+
+        System.out.println("\nPre order (sorted): ");
+        tree.preOrder();
+
+        System.out.println("\nThe number of nodes is: " + tree.getSize());
 
         System.out.print("Jones is in the tree?: ");
         System.out.println(tree.search("Jones"));
